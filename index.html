@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Climate Reality | Unit 3 · Combating Climate Change</title>
+<meta name="description" content="A student presentation on climate change: impacts, the global struggle, China's action, and our choice.">
+<style>
+  :root{
+    --bg:#0a0a0c;
+    --ink:#f8f9fa;
+    --muted:#9aa5ae;
+    --red:#e63946;
+    --green:#2a9d8f;
+    --blue:#4cc9f0;
+    --amber:#e9c46a;
+    --panel:rgba(255,255,255,.045);
+    --line:rgba(255,255,255,.10);
+    --font:'Helvetica Neue',Arial,'PingFang SC','Microsoft YaHei',sans-serif;
+    --radius:16px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+  /* ---------- 顶部进度条 ---------- */
+  #progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--green),var(--blue));z-index:200;transition:width .15s linear}
+
+  /* ---------- 每一屏 ---------- */
+  section{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(48px,6.5vh,84px) 7vw;border-bottom:1px solid rgba(255,255,255,.06);overflow:hidden}
+  .bg{position:absolute;inset:0;background-size:cover;background-position:center;z-index:-1;filter:brightness(.32) saturate(.9);transform:scale(1.02)}
+  .bg::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 80% at 20% 20%,rgba(10,10,12,.25),rgba(10,10,12,.9))}
+
+  .wrap{position:relative;z-index:1;width:100%;max-width:1240px;margin:0 auto}
+
+  /* ---------- 进入动画 ---------- */
+  .reveal{opacity:0;transform:translateY(36px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+  .reveal.active{opacity:1;transform:none}
+
+  /* ---------- 文字 ---------- */
+  h1{font-size:clamp(2.1rem,4.7vw,3.9rem);line-height:1.06;font-weight:800;letter-spacing:-1.2px;margin-bottom:16px}
+  h2{font-size:clamp(1.55rem,3.2vw,2.35rem);color:var(--green);margin-bottom:12px;font-weight:750;letter-spacing:-.5px;line-height:1.15}
+  h3{font-size:1.08rem;font-weight:700;margin-bottom:6px}
+  .kicker{font-size:clamp(.72rem,1.3vw,.86rem);color:var(--muted);letter-spacing:3px;text-transform:uppercase;font-weight:600;margin-bottom:10px}
+  .lead{font-size:clamp(.96rem,1.35vw,1.14rem);color:#d9dee3;max-width:62ch}
+  .muted{color:var(--muted)}
+  .red{color:var(--red)} .green{color:var(--green)} .blue{color:var(--blue)} .amber{color:var(--amber)}
+  strong{color:#fff}
+
+  /* ---------- 图片卡 ---------- */
+  figure.ph{position:relative;overflow:hidden;border-radius:var(--radius);border:1px solid var(--line);background:#14161a;margin:0}
+  figure.ph img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.16,1,.3,1),filter .5s}
+  figure.ph:hover img{transform:scale(1.06)}
+  figure.ph figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 14px 10px;font-size:.78rem;color:#e8edf1;background:linear-gradient(transparent,rgba(6,8,10,.85));letter-spacing:.3px}
+
+  /* 图片通道（横向缩略图条） */
+  .strip{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:24px}
+  .strip figure.ph{aspect-ratio:16/10}
+
+  /* 双列 */
+  .split{display:grid;grid-template-columns:1.02fr .98fr;gap:40px;align-items:center;margin-top:18px}
+  .split.wide{grid-template-columns:1fr 1fr}
+
+  /* 马赛克图墙 */
+  .mosaic{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:12px;height:min(42vh,320px)}
+  .mosaic figure.ph:first-child{grid-row:span 2}
+
+  /* 三图等分 */
+  .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
+  .trio figure.ph{aspect-ratio:4/3}
+
+  /* ---------- 卡片网格 ---------- */
+  .grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin-top:24px}
+  .card{background:var(--panel);border-radius:var(--radius);border-top:3px solid var(--blue);overflow:hidden;transition:transform .4s,background .4s}
+  .card:hover{transform:translateY(-6px);background:rgba(255,255,255,.08)}
+  .card .thumb{aspect-ratio:16/9;overflow:hidden}
+  .card .thumb img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.95)}
+  .card .body{padding:14px 16px 18px}
+  .card .num{font-size:.72rem;letter-spacing:2px;color:var(--muted);font-weight:700}
+  .card p{font-size:.9rem;color:#cfd6dc}
+
+  /* ---------- 大数字 ---------- */
+  .big-number{font-size:clamp(3rem,8vw,5.8rem);font-weight:900;line-height:.95;letter-spacing:-3px;color:var(--green)}
+
+  /* ---------- 统计小条 ---------- */
+  .stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:9px 14px;font-size:.8rem;color:#dfe5ea}
+  .stat b{display:block;font-size:1.05rem;color:var(--amber);letter-spacing:-.4px}
+
+  /* ---------- 时间轴 ---------- */
+  .timeline{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 6px}
+  .chip{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:.86rem}
+  .chip b{color:var(--amber)}
+
+  /* ---------- 双人台词板 ---------- */
+  .notes{margin-top:24px;background:rgba(255,255,255,.05);border-left:4px solid var(--blue);padding:14px 20px;border-radius:0 12px 12px 0;max-width:980px;backdrop-filter:blur(8px)}
+  .notes .line{margin-bottom:10px;color:#dce3e8;font-style:italic;font-size:.92rem;line-height:1.5}
+  .notes .line:last-child{margin-bottom:0}
+  .speaker{display:block;margin-bottom:3px;font-weight:800;font-size:.7rem;letter-spacing:1.6px;text-transform:uppercase;font-style:normal}
+  .speaker.a{color:var(--blue)}
+  .speaker.b{color:var(--red)}
+
+  /* ---------- 侧边导航 ---------- */
+  .nav-dots{position:fixed;right:26px;top:50%;transform:translateY(-50%);z-index:150;display:flex;flex-direction:column;gap:14px}
+  .dot{width:11px;height:11px;border-radius:50%;background:rgba(255,255,255,.22);cursor:pointer;border:0;padding:0;transition:.3s}
+  .dot:hover{background:rgba(255,255,255,.5)}
+  .dot.active{background:var(--green);transform:scale(1.45);box-shadow:0 0 12px var(--green)}
+  .dot:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+
+  /* ---------- 页码 ---------- */
+  .counter{position:fixed;right:26px;bottom:22px;z-index:150;font-size:.78rem;letter-spacing:2px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .counter b{color:var(--ink)}
+
+  /* ---------- 滚动提示 ---------- */
+  .scroll-hint{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);font-size:.72rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);animation:bob 2.2s ease-in-out infinite}
+  @keyframes bob{0%,100%{opacity:.45;transform:translate(-50%,0)}50%{opacity:1;transform:translate(-50%,7px)}}
+
+  /* ---------- 居中收尾屏 ---------- */
+  .center{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+  .center .notes{margin-left:auto;margin-right:auto}
+
+  .credit{margin-top:30px;font-size:.74rem;color:#6f7a83;letter-spacing:.4px}
+
+  /* ---------- 响应式 ---------- */
+  @media (max-width:1000px){
+    .split,.split.wide{grid-template-columns:1fr;gap:26px}
+    .mosaic{height:auto;aspect-ratio:4/3}
+    .strip{grid-template-columns:repeat(2,1fr)}
+  }
+  @media (max-width:760px){
+    section{padding:8vh 6vw}
+    .trio{grid-template-columns:1fr 1fr}
+    .nav-dots{right:12px;gap:10px}
+    .dot{width:9px;height:9px}
+    .counter{right:12px;bottom:14px}
+    .notes{padding:14px 16px;font-size:.94rem}
+    .lead{font-size:1rem}
+  }
+  @media (max-height:820px){
+    section{padding:4.5vh 7vw}
+    .mosaic{height:min(38vh,276px)}
+    .notes{margin-top:16px}
+    .notes .line{font-size:.86rem}
+    h1{font-size:clamp(1.9rem,4.3vw,3.2rem)}
+    .big-number{font-size:clamp(2.6rem,7vw,4.6rem)}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .reveal{opacity:1;transform:none;transition:none}
+    .scroll-hint{animation:none}
+    figure.ph img{transition:none}
+  }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<nav class="nav-dots" aria-label="Slide navigation">
+  <button class="dot active" data-target="s1" aria-label="Slide 1: Cover"></button>
+  <button class="dot" data-target="s2" aria-label="Slide 2: Roadmap"></button>
+  <button class="dot" data-target="s3" aria-label="Slide 3: Impacts on health"></button>
+  <button class="dot" data-target="s4" aria-label="Slide 4: Eco-anxiety"></button>
+  <button class="dot" data-target="s5" aria-label="Slide 5: Global struggle"></button>
+  <button class="dot" data-target="s6" aria-label="Slide 6: China's action"></button>
+  <button class="dot" data-target="s7" aria-label="Slide 7: Our choice"></button>
+  <button class="dot" data-target="s8" aria-label="Slide 8: Conclusion"></button>
+</nav>
+<div class="counter"><b id="cur">01</b> / 08</div>
+
+<!-- ============ 1. COVER ============ -->
+<section id="s1">
+  <div class="bg" style="background-image:url('images/cover-hands.jpg')"></div>
+  <div class="reveal wrap">
+    <p class="kicker">Unit 3 · Combating Climate Change</p>
+    <h1>The Climate Reality<br><span class="red">From Our Lives to Global Action</span></h1>
+    <p class="lead">A two-voice presentation on what climate change is doing to us — and what we can do about it.</p>
+
+    <div class="strip">
+      <figure class="ph"><img src="images/flood.jpg" alt="Flooded street after extreme rainfall" loading="lazy"><figcaption>Extreme weather</figcaption></figure>
+      <figure class="ph"><img src="images/solar.jpg" alt="Solar panels in a field" loading="lazy"><figcaption>Clean energy</figcaption></figure>
+      <figure class="ph"><img src="images/forest-path.jpg" alt="Forest path" loading="lazy"><figcaption>The world we share</figcaption></figure>
+      <figure class="ph"><img src="images/meeting.jpg" alt="People meeting around tables" loading="lazy"><figcaption>Global talks</figcaption></figure>
+    </div>
+
+    <div class="notes">
+      <div class="line"><span class="speaker a">Speaker A</span>"Good morning, everyone. Today, we want to talk about climate change. It is not just a scientific topic far away from us. It is a reality we are all living in today."</div>
+      <div class="line"><span class="speaker b">Speaker B</span>"Exactly. It's no longer just about polar bears. It's about our generation's present and future."</div>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</section>
+
+<!-- ============ 2. ROADMAP ============ -->
+<section id="s2">
+  <div class="reveal wrap">
+    <p class="kicker">Agenda</p>
+    <h2>Our Journey</h2>
+    <div class="grid-4">
+      <div class="card">
+        <div class="thumb"><img src="images/industry-smoke.jpg" alt="Industrial smokestacks" loading="lazy"></div>
+        <div class="body"><span class="num">01 · THE IMPACTS</span><h3>Threats to our bodies &amp; minds</h3><p>Heat, floods, disease — and eco-anxiety.</p></div>
+      </div>
+      <div class="card" style="border-top-color:var(--red)">
+        <div class="thumb"><img src="images/meeting.jpg" alt="Negotiation table" loading="lazy"></div>
+        <div class="body"><span class="num">02 · THE STRUGGLE</span><h3>Fragmented global action</h3><p>Good agreements, uneven commitment.</p></div>
+      </div>
+      <div class="card" style="border-top-color:var(--green)">
+        <div class="thumb"><img src="images/wind-turbines.jpg" alt="Wind turbines at sunset" loading="lazy"></div>
+        <div class="body"><span class="num">03 · CHINA'S ACTION</span><h3>Slashing emissions &amp; harmony</h3><p>Growth that is getting cleaner.</p></div>
+      </div>
+      <div class="card" style="border-top-color:#fff">
+        <div class="thumb"><img src="images/cover-hands.jpg" alt="Hands holding a young plant" loading="lazy"></div>
+        <div class="body"><span class="num">04 · OUR CHOICE</span><h3>Youth responsibility</h3><p>What we choose to study and do.</p></div>
+      </div>
+    </div>
+
+    <div class="notes">
+      <div class="line"><span class="speaker a">Speaker A</span>"We will share this reality with you in four parts. First, the direct impacts on us. Second, why the global struggle is difficult."</div>
+      <div class="line"><span class="speaker b">Speaker B</span>"Third, what China is doing about it. And finally, what our choices are."</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. IMPACTS: BODY ============ -->
+<section id="s3">
+  <div class="bg" style="background-image:url('images/flood.jpg')"></div>
+  <div class="reveal wrap">
+    <p class="kicker">Part 1 · The Impacts</p>
+    <h2>Extreme Weather &amp; Our Health</h2>
+
+    <div class="split">
+      <div>
+        <p class="lead">Look at the weather forecasts lately. Heatwaves and floods are becoming normal. This is not just about feeling uncomfortable. It is a direct threat to human health.</p>
+        <div class="stats">
+          <div class="stat"><b>Heat</b>strains hearts &amp; kidneys</div>
+          <div class="stat"><b>Floods</b>cut water &amp; food safety</div>
+          <div class="stat"><b>Disease</b>ranges are shifting</div>
+        </div>
+      </div>
+      <div class="mosaic">
+        <figure class="ph"><img src="images/flood.jpg" alt="Cars in flood water on a city street" loading="lazy"><figcaption>Urban flooding after extreme rainfall</figcaption></figure>
+        <figure class="ph"><img src="images/industry-smoke.jpg" alt="Smoke rising from industry" loading="lazy"><figcaption>Fossil emissions drive the heat</figcaption></figure>
+        <figure class="ph"><img src="images/wheat.jpg" alt="Wheat field" loading="lazy"><figcaption>Heat and drought hit harvests</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="notes">
+      <div class="line"><span class="speaker a">Speaker A</span>"First, the impacts. Look at the weather forecasts lately. Extreme heat and floods are becoming normal. This is not just about feeling uncomfortable."</div>
+      <div class="line"><span class="speaker b">Speaker B</span>"Right. It is a direct threat to human health. Heatwaves strain our hearts, and changing climates spread new diseases. As our textbook points out, heat-related deaths are rising. This is our generation's everyday reality."</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. IMPACTS: MIND ============ -->
+<section id="s4">
+  <div class="bg" style="background-image:url('images/valley-sunset.jpg')"></div>
+  <div class="reveal wrap">
+    <p class="kicker">Part 1 · The Impacts</p>
+    <h2>Eco-Anxiety</h2>
+
+    <div class="split">
+      <div>
+        <div class="big-number blue">Eco-<br>Anxiety</div>
+        <p class="lead" style="margin-top:18px">The invisible impact on our minds. It's a rational response to a real crisis — not a weakness.</p>
+      </div>
+      <div>
+        <figure class="ph" style="aspect-ratio:16/9"><img src="images/lone-tree.jpg" alt="A single tree on open land" loading="lazy"><figcaption>Living with the weight of the future</figcaption></figure>
+        <div class="trio" style="grid-template-columns:1fr 1fr;margin-top:12px">
+          <figure class="ph" style="aspect-ratio:16/10"><img src="images/forest-light.jpg" alt="Sunlight through forest" loading="lazy"><figcaption>What we fear losing</figcaption></figure>
+          <figure class="ph" style="aspect-ratio:16/10"><img src="images/pine.jpg" alt="Pine branches" loading="lazy"><figcaption>What we can protect</figcaption></figure>
+        </div>
+      </div>
+    </div>
+
+    <div class="notes">
+      <div class="line"><span class="speaker b">Speaker B</span>"There is also an invisible impact. Have you ever felt worried about the future when you see news about wildfires or floods?"</div>
+      <div class="line"><span class="speaker a">Speaker A</span>"This feeling has a name: Eco-anxiety. It's a rational response to a real crisis. Our generation is growing up with the weight of climate change on our minds."</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. THE STRUGGLE ============ -->
+<section id="s5">
+  <div class="bg" style="background-image:url('images/desert-road.jpg')"></div>
+  <div class="reveal wrap">
+    <p class="kicker">Part 2 · The Struggle</p>
+    <h2 class="red">Fragmented Global Action</h2>
+
+    <div class="timeline">
+      <span class="chip"><b>1997</b> Kyoto Protocol</span>
+      <span class="chip"><b>2009</b> Copenhagen</span>
+      <span class="chip"><b>2015</b> Paris Agreement</span>
+      <span class="chip"><b>2017</b> US withdrawal announced</span>
+    </div>
+
+    <div class="split">
+      <div>
+        <p class="lead">It's like a group project where everyone agrees on the goal, but some members refuse to share their work or resources. Some countries even withdrew due to economic interests.</p>
+        <div class="stats">
+          <div class="stat"><b>Common goal</b>agreed on paper</div>
+          <div class="stat"><b>Uneven burden</b>who pays, who cuts?</div>
+          <div class="stat"><b>Withdrawals</b>politics outruns pledges</div>
+        </div>
+      </div>
+      <div class="mosaic">
+        <figure class="ph"><img src="images/meeting.jpg" alt="Delegates in a meeting room" loading="lazy"><figcaption>Negotiations: everyone at one table</figcaption></figure>
+        <figure class="ph"><img src="images/industry-smoke.jpg" alt="Smokestacks" loading="lazy"><figcaption>Emissions keep rising anyway</figcaption></figure>
+        <figure class="ph"><img src="images/desert-road.jpg" alt="Road through dry landscape" loading="lazy"><figcaption>A long road, no shortcut</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="notes">
+      <div class="line"><span class="speaker a">Speaker A</span>"So, how is the world fighting back? We have signed global agreements like the Kyoto Protocol and the Paris Agreement. They are historic milestones."</div>
+      <div class="line"><span class="speaker b">Speaker B</span>"But the reality is a struggle. The global response is fragmented. It's like a group project where everyone agrees on the goal, but some members refuse to share their work or resources. Some countries even withdrew due to economic interests. It makes unified action very hard."</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. CHINA'S ACTION ============ -->
+<section id="s6">
+  <div class="reveal wrap">
+    <p class="kicker">Part 3 · The Solution</p>
+    <h2>China's Action</h2>
+
+    <div class="split">
+      <div>
+        <div class="big-number">34.4%</div>
+        <h3 style="margin-top:6px">Carbon emissions per unit of GDP slashed</h3>
+        <p class="muted">2012 – 2022 · while GDP more than doubled</p>
+        <div style="background:rgba(42,157,143,.10);border:1px solid var(--green);border-radius:var(--radius);padding:22px;margin-top:24px">
+          <h3 class="green">Harmony between man and nature</h3>
+          <p style="color:#d5dde2">We don't have to choose between economy and environment. Leadership in EVs, solar and wind shows another path is possible.</p>
+        </div>
+      </div>
+      <div class="mosaic">
+        <figure class="ph"><img src="images/solar.jpg" alt="Solar panel array in a field" loading="lazy"><figcaption>Solar at scale</figcaption></figure>
+        <figure class="ph"><img src="images/wind-turbines.jpg" alt="Wind turbines at sunset" loading="lazy"><figcaption>Wind power</figcaption></figure>
+        <figure class="ph"><img src="images/ev-charging.jpg" alt="Electric vehicle charging plug" loading="lazy"><figcaption>Electric mobility</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="notes">
+      <div class="line"><span class="speaker b">Speaker B</span>"However, there is hope. Look at China's action. We are proving that we don't have to choose between economy and environment."</div>
+      <div class="line"><span class="speaker a">Speaker A</span>"Between 2012 and 2022, China slashed carbon emissions per unit of GDP by 34.4%, while our GDP more than doubled. We are leading in green technologies like EVs and solar power. This reflects our traditional wisdom: seeking harmony between man and nature."</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7. OUR CHOICE ============ -->
+<section id="s7">
+  <div class="bg" style="background-image:url('images/mountains.jpg')"></div>
+  <div class="reveal wrap center">
+    <p class="kicker">Part 4 · Our Choice</p>
+    <h2 style="color:#fff;max-width:24ch;text-align:center">"The greatest threat is the belief that someone else will save it."</h2>
+    <p class="kicker" style="margin-top:4px">— Robert Swan</p>
+
+    <div class="trio" style="width:100%;max-width:900px">
+      <figure class="ph"><img src="images/forest-path.jpg" alt="Path through a forest" loading="lazy"><figcaption>Awareness</figcaption></figure>
+      <figure class="ph"><img src="images/lone-tree.jpg" alt="Lone tree in a field" loading="lazy"><figcaption>Responsibility</figcaption></figure>
+      <figure class="ph"><img src="images/wind-hills.jpg" alt="Wind farm rolling hills" loading="lazy"><figcaption>Action</figcaption></figure>
+    </div>
+
+    <div class="notes">
+      <div class="line"><span class="speaker a">Speaker A</span>"Finally, let's return to ourselves. The explorer Robert Swan said: 'The greatest threat to our planet is the belief that someone else will save it.'"</div>
+      <div class="line"><span class="speaker b">Speaker B</span>"As university students, global competence means taking responsibility. It's about being aware of the crisis, understanding the global struggle, and making conscious choices in our studies and future careers."</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8. CONCLUSION ============ -->
+<section id="s8">
+  <div class="bg" style="background-image:url('images/forest-light.jpg')"></div>
+  <div class="reveal wrap center">
+    <h1 style="font-size:clamp(2.8rem,7.4vw,5.6rem);margin-bottom:26px">See the Crisis.<br>Take Action.</h1>
+    <p class="kicker">Thank you for listening · Q&amp;A</p>
+
+    <div class="notes" style="background:rgba(255,255,255,.06);border-left-color:var(--green)">
+      <div class="line"><span class="speaker a">Speaker A &amp; B (Together)</span>"Let's face this reality together. Thank you for listening!"</div>
+      <div class="line"><span class="speaker a">Speaker A</span>"We are happy to take any questions."</div>
+    </div>
+
+    <p class="credit">Photos: Unsplash (free to use) · Built for Unit 3, Global Competence</p>
+  </div>
+</section>
+
+<script>
+(function () {
+  var slides = Array.prototype.slice.call(document.querySelectorAll('section'));
+  var dots = Array.prototype.slice.call(document.querySelectorAll('.dot'));
+  var bar = document.getElementById('progress');
+  var cur = document.getElementById('cur');
+
+  /* 1. 滚动渐显 + 导航同步 */
+  var revealItems = document.querySelectorAll('.reveal');
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('active');
+      var sec = entry.target.closest('section');
+      if (sec) setActive(sec.id);
+    });
+  }, { threshold: 0.25 });
+  revealItems.forEach(function (el) { observer.observe(el); });
+
+  /* 2. 进度条与页码 */
+  function onScroll() {
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    var p = h > 0 ? (window.scrollY / h) * 100 : 0;
+    bar.style.width = p + '%';
+    var near = slides[0];
+    for (var i = 0; i < slides.length; i++) {
+      var r = slides[i].getBoundingClientRect();
+      if (r.top <= window.innerHeight * 0.45) near = slides[i];
+    }
+    if (near) {
+      var idx = slides.indexOf(near) + 1;
+      cur.textContent = String(idx).padStart(2, '0');
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* 3. 导航点 */
+  function setActive(id) {
+    dots.forEach(function (d) { d.classList.toggle('active', d.dataset.target === id); });
+  }
+  function goTo(id) {
+    var el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  dots.forEach(function (d) {
+    d.addEventListener('click', function () { goTo(d.dataset.target); });
+  });
+
+  /* 4. 键盘翻页 */
+  document.addEventListener('keydown', function (e) {
+    var down = ['ArrowDown', 'PageDown', ' '].indexOf(e.key) > -1;
+    var up = ['ArrowUp', 'PageUp'].indexOf(e.key) > -1;
+    if (!down && !up) return;
+    e.preventDefault();
+    var current = 0;
+    slides.forEach(function (s, i) { if (s.getBoundingClientRect().top <= 80) current = i; });
+    var next = Math.min(slides.length - 1, Math.max(0, current + (down ? 1 : -1)));
+    goTo(slides[next].id);
+  });
+})();
+</script>
+</body>
+</html>
